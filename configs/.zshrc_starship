@@ -1,0 +1,46 @@
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# my configs
+export PATH=$PATH:"~/.local/bin"
+export DEV="/home/benhossi/development"
+
+# Keybind
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[F" end-of-line
+bindkey "^[[H" beginning-of-line
+bindkey "^[[3~" delete-char
+
+# User configurations
+source $HOME/.sh_aliases
+. "$HOME/.asdf/asdf.sh"
+
+source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+# source ~/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/.config/zsh/plugins/fast-syntax-highlighting/F-Sy-H.plugin.zsh
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+
+# if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+#         source /etc/profile.d/vte.sh
+# fi
+
+function set_win_title(){
+    echo -ne "\033]0; 📂 $(basename "$PWD") \007"
+}
+precmd_functions+=(set_win_title)
+
+_fix_cursor() {
+   echo -ne '\e[4 q'
+}
+
+precmd_functions+=(_fix_cursor)
+
+
+eval "$(starship init zsh)"

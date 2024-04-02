@@ -1,0 +1,102 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+palette = 'personal'
+
+command_timeout = 900000
+
+format = """\
+[](fg:#7DF9AA)\
+$status$jobs$cmd_duration$python\
+[](fg:#7DF9AA bg:#1C3A5E)\
+$directory\
+[](fg:#1C3A5E bg:#3B76F0)\
+$git_branch\
+[](fg:#3B76F0 bg:#404040)\
+[$git_status](bg:#404040)\
+[](fg:#404040)\
+$line_break\
+$character\
+"""
+
+[status]
+style = "fg:#1C3A5E bg:#7DF9AA"
+symbol = " [✘](bold red bg:#7DF9AA)"
+success_symbol = "[✔](bold fg:#1C3A5E bg:#7DF9AA)"
+format = '[$symbol( $common_meaning)]($style)'
+pipestatus = true
+pipestatus_separator= '[ ➜ ](fg:#1C3A5E bg:#7DF9AA)'
+pipestatus_format = '[\[ $pipestatus \] ](fg:#1C3A5E bg:#7DF9AA)[➜ ](fg:#1C3A5E bg:#7DF9AA)[$symbol( $common_meaning)]($style)'
+map_symbol = true
+disabled = false
+
+
+[directory]
+format = "[ ﱮ $path ]($style)"
+style = "fg:#7DF9AA bg:#1C3A5E"
+
+[git_branch]
+format = '[ $symbol$branch ]($style)'
+symbol = " "
+style = "fg:#E4E4E4 bg:#3B76F0"
+
+[git_status]
+format = ' ($all_status)(\( $ahead_behind(bold)\))'
+ahead = '[🡹 \(${count}\) ](bold bright-green bg:#404040)'
+behind = '[🢃 \(${count}\) ](bold bright-red bg:#404040)'
+conflicted = '[⚔️\(${count}\) ](bold red bg:#404040)'
+deleted = '[🗑️ \(${count}\)](bright-red bg:#404040) '
+diverged = '[⇆](bold orange bg:#404040) [🡹 \($ahead_count\)](bold bright-green bg:#404040) [🢃 \($behind_count\)](bold bright-red bg:#404040) '
+modified = '[🔃 \(${count}\) ](bold light-orange bg:#404040)'
+renamed = '[Rename\(${count}\)](bold yellow bg:#404040) '
+staged = '[📦\(${count}\) ](bold bright-green bg:#404040)'
+stashed = '[📂\(${count}\) ](bold lavander bg:#404040)'
+untracked = '[🌟\(${count}\) ](bold light-blue bg:#404040)'
+up_to_date = '[up to date ](bold light-green bg:#404040)'
+
+[git_metrics]
+format = "([+$added]($added_style))[]($added_style)"
+added_style = "fg:#1C3A5E bg:#FCF392"
+deleted_style = "fg:bright-red bg:235"
+disabled = false
+
+[hg_branch]
+format = "[ $symbol$branch ]($style)"
+symbol = " "
+
+[cmd_duration]
+format = "[ |  $duration]($style)"
+style = "fg:#1C3A5E bg:#7DF9AA"
+
+[character]
+success_symbol = '[⮞](bold green)'
+error_symbol = '[⮞](bold green)'
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:#1d2230"
+format = '[[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)]($style)'
+
+[palettes.personal]
+orange = '#FFAF19'
+light-orange = '#ff8000'
+bright-red = '#e06666'
+lavander = '#8090ff'
+light-blue = '#63b8ff'
+light-green = '#86cb68'
+
+[jobs]
+format ='[ | $symbol-$number ]($style)'
+symbol = '⚙'
+number_threshold = 2
+symbol_threshold = 1
+style = "fg:#1C3A5E bg:#7DF9AA"
+
+[python]
+format ='[ | $symbol$version (\($virtualenv\) )]($style)'
+style = "fg:#1C3A5E bg:#7DF9AA"
+version_format = "${major}.${minor}"
