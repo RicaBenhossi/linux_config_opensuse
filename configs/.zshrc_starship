@@ -1,9 +1,14 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # my configs
+
+# Variables
 export PATH=$PATH:"~/.local/bin"
 export DEV="/home/benhossi/development"
+
+## case insensitive path-completion
+autoload -Uz +X compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' menu select
+
 
 # Keybind
 bindkey "^[[1;5D" backward-word
@@ -16,31 +21,24 @@ bindkey "^[[3~" delete-char
 source $HOME/.sh_aliases
 . "$HOME/.asdf/asdf.sh"
 
+# ZSH Plugins
 source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
-# source ~/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 source ~/.config/zsh/plugins/fast-syntax-highlighting/F-Sy-H.plugin.zsh
-
-# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-
-# if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-#         source /etc/profile.d/vte.sh
-# fi
-
+# Set tab/window title as the actual directory
 function set_win_title(){
     echo -ne "\033]0; 📂 $(basename "$PWD") \007"
 }
 precmd_functions+=(set_win_title)
 
+# Set cursor as a blinking underscore.
 _fix_cursor() {
-   echo -ne '\e[4 q'
+    echo -ne '\e[3 q'
 }
-
 precmd_functions+=(_fix_cursor)
 
-
+# Start staship
 eval "$(starship init zsh)"
