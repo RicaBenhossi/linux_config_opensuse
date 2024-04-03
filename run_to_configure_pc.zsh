@@ -78,6 +78,26 @@ echo 'Press any key to continue...'; read -k1 -s
 echo
 sudo zypper install starship -y
 echo
+echo "====================> Install Starship terminal"
+echo
+echo 'Press any key to continue...'; read -k1 -s
+echo
+echo "====================> Install Patterns"
+echo
+echo "--------------------> devel_basis"
+echo
+echo 'Press any key to continue...'; read -k1 -s
+echo
+sudo zypper install -t pattern devel_basis
+echo
+echo "--------------------> devel_python3"
+echo
+echo 'Press any key to continue...'; read -k1 -s
+echo
+sudo zypper install -t pattern devel_python3
+echo
+echo
+echo
 read -rsp $"Configuration process finished. Press any key to proceed..."
 echo
 exit
