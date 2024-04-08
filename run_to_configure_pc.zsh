@@ -76,7 +76,7 @@ echo "====================> Install Starship terminal"
 echo
 echo 'Press any key to continue...'; read -k1 -s
 echo
-sudo zypper install starship -y
+sudo zypper install starship
 echo
 echo "====================> Install Patterns"
 echo
@@ -92,13 +92,14 @@ echo 'Press any key to continue...'; read -k1 -s
 echo
 sudo zypper install -t pattern devel_python3
 echo
-echo "====================> Install Packman fix"
-echo
-echo 'Press any key to continue...'; read -k1 -s
-echo
-sudo zypper ar -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials &&
-sudo zypper dup --from packman-essentials --allow-vendor-change
-echo
+# Install this if youtube videos won´t run
+# echo "====================> Install Packman fix"
+# echo
+# echo 'Press any key to continue...'; read -k1 -s
+# echo
+# sudo zypper ar -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials &&
+# sudo zypper dup --from packman-essentials --allow-vendor-change
+# echo
 echo
 read -rsp $"Configuration process finished. Press any key to proceed..."
 echo
