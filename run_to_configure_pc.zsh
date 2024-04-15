@@ -39,10 +39,10 @@ echo "====================> Configure Terminal Visual"
 echo
 echo 'Press any key to continue...'; read -k1 -s
 echo
-rm ~/.config/gtk-4.0/gtk.css &&
-ln $root_my_config/configs/gtk-X.0-gtk.css ~/.config/gtk-4.0/gtk.css &&
-rm ~/.config/gtk-3.0/gtk.css &&
-ln $root_my_config/configs/gtk-X.0-gtk.css ~/.config/gtk-3.0/gtk.css
+rm ~/.config/gtk-4.0/gtk.css;
+ln $root_my_config/configs/gtk-X.0-gtk.css ~/.config/gtk-4.0/gtk.css;
+rm ~/.config/gtk-3.0/gtk.css;
+ln $root_my_config/configs/gtk-X.0-gtk.css ~/.config/gtk-3.0/gtk.css;
 echo
 echo "====================> Downloading .gitconfig file"
 echo
@@ -104,6 +104,13 @@ echo 'Press any key to continue...'; read -k1 -s
 echo
 sudo zypper -n install openssl lzma-devel
 echo
+echo "====================> Install libraries to fix python install (asdf)"
+echo
+echo 'Press any key to continue...'; read -k1 -s
+echo
+sudo zypper install tk-devel sqlite3-devel libffi-devel readline-devel libbz2-devel;
+
+echo
 echo "====================> Install Packman fix"
 echo
 echo 'Press any key to continue...'; read -k1 -s
@@ -118,7 +125,7 @@ echo
 sudo zypper ar https://packages.microsoft.com/yumrepos/vscode vscode &&
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
 sudo zypper refresh &&
-sudo zypper install code code-insiders
+sudo zypper install code-insiders
 echo
 echo
 read -rsp $"Configuration process finished. Press any key to proceed..."
