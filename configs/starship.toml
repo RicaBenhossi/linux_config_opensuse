@@ -10,14 +10,14 @@ command_timeout = 900000
 
 format = """\
 [](fg:#7DF9AA)\
-$status$jobs$cmd_duration$python\
+$status$jobs$cmd_duration$time$python$golang\
 [](fg:#7DF9AA bg:#1C3A5E)\
 $directory\
 [](fg:#1C3A5E bg:#3B76F0)\
 $git_branch\
-[](fg:#3B76F0 bg:#404040)\
-[$git_status](bg:#404040)\
-[](fg:#404040)\
+[](fg:#3B76F0 bg:#585858)\
+[$git_status](bg:#585858)\
+[](fg:#585858)\
 $line_break\
 $character\
 """
@@ -25,7 +25,7 @@ $character\
 [status]
 style = "fg:#1C3A5E bg:#7DF9AA"
 symbol = " [✘](bold red bg:#7DF9AA)"
-success_symbol = "[✔](bold fg:#1C3A5E bg:#7DF9AA)"
+success_symbol = "[✔ ](bold fg:#1C3A5E bg:#7DF9AA)"
 format = '[$symbol( $common_meaning)]($style)'
 pipestatus = true
 pipestatus_separator= '[ ➜ ](fg:#1C3A5E bg:#7DF9AA)'
@@ -44,18 +44,18 @@ symbol = " "
 style = "fg:#E4E4E4 bg:#3B76F0"
 
 [git_status]
-format = ' ($all_status)(\( $ahead_behind(bold)\))'
-ahead = '[🡹 \(${count}\) ](bold bright-green bg:#404040)'
-behind = '[🢃 \(${count}\) ](bold bright-red bg:#404040)'
-conflicted = '[⚔️\(${count}\) ](bold red bg:#404040)'
-deleted = '[🗑️ \(${count}\)](bright-red bg:#404040) '
-diverged = '[⇆](bold orange bg:#404040) [🡹 \($ahead_count\)](bold bright-green bg:#404040) [🢃 \($behind_count\)](bold bright-red bg:#404040) '
-modified = '[🔃 \(${count}\) ](bold light-orange bg:#404040)'
-renamed = '[Rename\(${count}\)](bold yellow bg:#404040) '
-staged = '[📦\(${count}\) ](bold bright-green bg:#404040)'
-stashed = '[📂\(${count}\) ](bold lavander bg:#404040)'
-untracked = '[🌟\(${count}\) ](bold light-blue bg:#404040)'
-up_to_date = '[up to date ](bold light-green bg:#404040)'
+format = ' ($all_status)(| $ahead_behind(bold)|)'
+ahead = '[🡹 \(${count}\) ](bold bright-green bg:#585858)'
+behind = '[🢃 \(${count}\) ](bold bright-red bg:#585858)'
+conflicted = '[💥\(${count}\) ](bold red bg:#585858)'
+deleted = '[🗑️\(${count}\)](bright-red bg:#585858) '
+diverged = '[⇆](bold orange bg:#585858) [🡹 \($ahead_count\)](bold bright-green bg:#585858) [🢃 \($behind_count\)](bold bright-red bg:#585858) '
+modified = '[🔃\(${count}\) ](bold light-orange bg:#585858)'
+renamed = '[Rename\(${count}\)](bold yellow bg:#585858) '
+staged = '[📦\(${count}\) ](bold bright-green bg:#585858)'
+stashed = '[📂\(${count}\) ](bold lavander bg:#585858)'
+untracked = '[🌟\(${count}\) ](bold light-blue bg:#585858)'
+up_to_date = '[up to date ](bold light-green bg:#585858)'
 
 [git_metrics]
 format = "([+$added]($added_style))[]($added_style)"
@@ -68,7 +68,7 @@ format = "[ $symbol$branch ]($style)"
 symbol = " "
 
 [cmd_duration]
-format = "[ |  $duration]($style)"
+format = "[| ⏳[$duration]($style) ]($style)"
 style = "fg:#1C3A5E bg:#7DF9AA"
 
 [character]
@@ -77,9 +77,10 @@ error_symbol = '[⮞](bold green)'
 
 [time]
 disabled = false
-time_format = "%R" # Hour:Minute Format
-style = "bg:#1d2230"
-format = '[[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)]($style)'
+use_12hr = false
+style = "fg:#1C3A5E bg:#7DF9AA"
+format = '[| 🕓 $time ]($style)'
+time_format = "%R"
 
 [palettes.personal]
 orange = '#FFAF19'
@@ -90,13 +91,23 @@ light-blue = '#63b8ff'
 light-green = '#86cb68'
 
 [jobs]
-format ='[ | $symbol-$number ]($style)'
-symbol = '⚙'
-number_threshold = 2
+format ='[| $symbol[$number ]($style)]($style)'
+symbol = '⚙️'
+number_threshold = 1
 symbol_threshold = 1
 style = "fg:#1C3A5E bg:#7DF9AA"
 
 [python]
-format ='[ | $symbol$version (\($virtualenv\) )]($style)'
+format ='[| $symbol$version (\($virtualenv\) )]($style)'
 style = "fg:#1C3A5E bg:#7DF9AA"
+version_format = "${major}.${minor}"
+
+[golang]
+format ='[| $symbol$version ]($style)'
+style = "fg:#1C3A5E bg:#7DF9AA"
+version_format = "${major}.${minor}"
+
+[java]
+format ='[ | $symbol$version (\($virtualenv\) )]($style)'
+style = "fg:#7DF9AA bg:#1C3A5E"
 version_format = "${major}.${minor}"

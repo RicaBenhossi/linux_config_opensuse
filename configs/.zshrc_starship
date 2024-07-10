@@ -28,6 +28,42 @@ source ~/.config/zsh/plugins/fast-syntax-highlighting/F-Sy-H.plugin.zsh
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+# Function to open pycharm
+function _pycharm(){
+    local empty="" && eval pycharm_community "${1-empty}" > /dev/null 2>&1 &
+}
+
+# Function to activate/deactivate python venv when enter/exit a folder
+function cd() {
+  builtin cd "$@"
+    if [[ -z "$VIRTUAL_ENV" ]] ; then
+        ## If env folder is found then activate the vitualenv
+        if [[ -d ./venv ]] ; then
+            . ./venv/bin/activate
+            echo
+            echo "***********************************************"
+            echo "*                                             *"
+            echo "*    Python virtual environment ACTIVATED.    *"
+            echo "*                                             *"
+            echo "***********************************************"
+        fi
+    else
+        ## check the current folder belong to earlier VIRTUAL_ENV folder
+        # if yes then do nothing
+        # else deactivate
+        parentdir="$(dirname "$VIRTUAL_ENV")"
+        if [[ "$PWD"/ != "$parentdir"/* ]] ; then
+            deactivate
+            echo
+            echo "*************************************************"
+            echo "*                                               *"
+            echo "*    Python virtual environment DEACTIVATED.    *"
+            echo "*                                               *"
+            echo "*************************************************"
+        fi
+    fi
+}
+
 # Set tab/window title as the actual directory
 function set_win_title(){
     echo -ne "\033]0; 📂 $(basename "$PWD") \007"
