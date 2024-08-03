@@ -10,6 +10,17 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' menu select
 
 
+# enable color support of ls and also add handy aliases
+if [ -f ~/.dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    echo entrou
+    alias ls='ls --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
 # Keybind
 bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
