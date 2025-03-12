@@ -3,4 +3,4 @@ alias lsa='ls -la'
 alias ll='ls -alF'
 alias l='ls -CF'
 alias la='ls -A'
-alias venv-start='. ./venv/bin/activa
+alias venv-start='. ./venv/bin/activated'
